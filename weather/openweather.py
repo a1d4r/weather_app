@@ -18,7 +18,13 @@ def get_weather_data(city):
     Sample data: https://samples.openweathermap.org/data/2.5/weather?q=London&appid=439d4b804bc8187953eb36d2a8c26a02
     """
     url = 'http://api.openweathermap.org/data/2.5/weather'
-    response = requests.get(url, params={'q': city, 'appid': secrets.OPEN_WEATHER_API_KEY}).json()
+    params = {
+        'q': city,
+        'units': 'metric',  # Celsius
+        'appid': secrets.OPEN_WEATHER_API_KEY,
+    }
+
+    response = requests.get(url, params=params).json()
 
     if response['cod'] == 429:
         # API limit has been reached
