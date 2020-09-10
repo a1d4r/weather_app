@@ -1,6 +1,10 @@
 import requests
+import requests_cache
 
 import secrets
+
+# Cache the weather data for 5 minutes
+requests_cache.install_cache('openweather_cache', backend='sqlite', expire_after=600)
 
 
 class QuotaError(Exception):
