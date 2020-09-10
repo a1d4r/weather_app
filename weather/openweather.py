@@ -1,7 +1,7 @@
 import requests
 import requests_cache
 
-import secrets
+import config
 
 # Cache the weather data for 5 minutes
 requests_cache.install_cache('openweather_cache', backend='sqlite', expire_after=600)
@@ -21,7 +21,7 @@ def get_weather_data(city):
     params = {
         'q': city,
         'units': 'metric',  # Celsius
-        'appid': secrets.OPEN_WEATHER_API_KEY,
+        'appid': config.OPEN_WEATHER_API_KEY,
     }
 
     response = requests.get(url, params=params).json()
