@@ -1,9 +1,6 @@
 # PyCharm
 .idea/
 
-# Secret keys
-secrets.py
-
 # Cache
 *.sqlite
 
@@ -11,7 +8,6 @@ secrets.py
 __pycache__/
 *.py[cod]
 *$py.class
-
 
 # C extensions
 *.so

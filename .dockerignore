@@ -2,11 +2,13 @@
 .git/
 .gitignore
 
+# Docker
+.dockerignore
+.docker-compose.yml
+Dockerfile
+
 # PyCharm
 .idea/
-
-# Secret keys
-secrets.py
 
 # Cache
 *.sqlite

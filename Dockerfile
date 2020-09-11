@@ -11,14 +11,14 @@ WORKDIR /usr/src/app
 
 # Install dependencies
 RUN pip install --upgrade pip
-COPY requirements.txt .
+COPY web/requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy the project
-COPY . .
+COPY web/ .
 
 # Install django apps
-RUN python manage.py makemigrations && python manage.py migrate
+# RUN python manage.py makemigrations && python manage.py migrate
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
