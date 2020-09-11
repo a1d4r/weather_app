@@ -6,6 +6,11 @@
 </head>
 <body>
   <h1>Weather App</h1>
+  <form action="{% url 'new-city' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add">
+  </form>
   <hr>
   {% for weather in weather_list %}
     <ul>
@@ -13,7 +18,7 @@
       <li>Temp: {{ weather.temp }} &#8451;</li>
       <li>Description: {{ weather.description }}</li>
       <li>Icon:
-        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="weather_img">
+        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}.png" alt="weather_img">
       </li>
     </ul>
     <hr>
