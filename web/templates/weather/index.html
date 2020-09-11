@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add">
+  </form>
+  <hr>
+  {% for city in cities %}
+    {{ city }}
+    <ul>
+      <li>City: {{ city.name }}</li>
+      <li>Temp: {{ city.temp }} &#8451;</li>
+      <li>Description: {{ city.description }}</li>
+      <li>Icon:
+        <img src="http://openweathermap.org/img/wn/{{ city.icon }}.png" alt="weather_img">
+      </li>
+      <li><a href="{% url 'delete-city' city.id %}">Delete city</a></li>
+    </ul>
+    <hr>
+  {% endfor %}
+</body>
+</html>
