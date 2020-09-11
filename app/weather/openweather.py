@@ -1,10 +1,11 @@
 import requests
 import requests_cache
-
-import config
+import os
 
 # Cache the weather data for 5 minutes
 requests_cache.install_cache('openweather_cache', backend='sqlite', expire_after=600)
+
+OPEN_WEATHER_API_KEY = os.environ.get('OPEN_WEATHER_API_KEY')
 
 
 class QuotaError(Exception):
@@ -21,7 +22,7 @@ def get_weather_data(city):
     params = {
         'q': city,
         'units': 'metric',  # Celsius
-        'appid': config.OPEN_WEATHER_API_KEY,
+        'appid': OPEN_WEATHER_API_KEY,
     }
 
     response = requests.get(url, params=params).json()
