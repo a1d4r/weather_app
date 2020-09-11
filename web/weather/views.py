@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 
 from .openweather import get_weather_data
 from .models import City
@@ -7,6 +7,11 @@ from .forms import CityForm
 
 
 def index(request):
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            form.save()
     # weather for cities
     cities = City.objects.all()
     cities = [{**get_weather_data(city.name), 'id': city.id} for city in cities]
@@ -16,15 +21,6 @@ def index(request):
 
     context = {'cities': cities, 'form': form}
     return render(request, 'weather/index.html', context=context)
-
-
-def new_city(request):
-    if request.method == 'POST':
-        form = CityForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('index'))
 
 
 def delete_city(request, city_id):

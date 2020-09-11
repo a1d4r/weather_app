@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Weather App</h1>
-  <form action="{% url 'new-city' %}" method="post">
+  <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Add">
@@ -15,7 +15,7 @@
   {% for city in cities %}
     {{ city }}
     <ul>
-      <li>City: {{ city.city }}</li>
+      <li>City: {{ city.name }}</li>
       <li>Temp: {{ city.temp }} &#8451;</li>
       <li>Description: {{ city.description }}</li>
       <li>Icon:

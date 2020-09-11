@@ -13,6 +13,11 @@ class QuotaError(Exception):
     pass
 
 
+class NoSuchCityError(Exception):
+    """Exception to be raised when the city is not founc"""
+    pass
+
+
 def get_weather_data(city):
     """
     Return weather data by a city name.
@@ -27,12 +32,15 @@ def get_weather_data(city):
 
     response = requests.get(url, params=params).json()
 
-    if response['cod'] == 429:
+    if response['cod'] == '404':
+        raise NoSuchCityError(response['message'])
+
+    if response['cod'] == '429':
         # API limit has been reached
         raise QuotaError(response['message'])
 
     return {
-        'city': city,
+        'name': response['name'],
         'temp': response['main']['temp'],
         'description': response['weather'][0]['description'],
         'icon': response['weather'][0]['icon'],
