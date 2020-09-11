@@ -3,7 +3,6 @@ version: '3.8'
 services:
   web:
     image: a1d4r/weather_app
-    build: .
     command: >
         sh -c "python manage.py makemigrations &&
         python manage.py migrate &&
