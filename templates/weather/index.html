@@ -12,14 +12,16 @@
     <input type="submit" value="Add">
   </form>
   <hr>
-  {% for weather in weather_list %}
+  {% for city in cities %}
+    {{ city }}
     <ul>
-      <li>City: {{ weather.city }}</li>
-      <li>Temp: {{ weather.temp }} &#8451;</li>
-      <li>Description: {{ weather.description }}</li>
+      <li>City: {{ city.city }}</li>
+      <li>Temp: {{ city.temp }} &#8451;</li>
+      <li>Description: {{ city.description }}</li>
       <li>Icon:
-        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}.png" alt="weather_img">
+        <img src="http://openweathermap.org/img/wn/{{ city.icon }}.png" alt="weather_img">
       </li>
+      <li><a href="{% url 'delete-city' city.id %}">Delete city</a></li>
     </ul>
     <hr>
   {% endfor %}
